@@ -1,7 +1,14 @@
+"use client"
+import { clearUser } from '@/state/features/userSlice';
 import Link from 'next/link';
 import { Fragment } from 'react';
+import { useDispatch } from 'react-redux';
 
 const Navbar: React.FC = () => {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(clearUser());
+  };
   return (
     <nav className="bg-blue-500 p-4">
       <div className="container mx-auto flex items-center justify-between">
@@ -39,7 +46,7 @@ const Navbar: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link href="/account">
+            {/* <Link href="/account"> */}
               <Fragment>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -55,9 +62,9 @@ const Navbar: React.FC = () => {
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-                Account
+                <span onClick={handleLogout}>Account</span>
               </Fragment>
-            </Link>
+            {/* </Link> */}
           </li>
         </ul>
         <div className="md:hidden">
