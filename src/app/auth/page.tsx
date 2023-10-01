@@ -1,19 +1,19 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { setUser } from '@/state/features/userSlice'; 
+import { setUser } from "@/state/features/userSlice";
 
 const Page = () => {
   const dispatch = useDispatch();
-  const router=useRouter();
-  const [email, setemail] = useState("")
-  const [password,setPassword]=useState('')
+  const router = useRouter();
+  const [email, setemail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const handleLogin = () => {
-    const user = {email,password};
-     
+    const user = { email, password, userType: "user" };
+
     dispatch(setUser(user));
-    router.push('/')
+    router.push("/");
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
@@ -36,7 +36,7 @@ const Page = () => {
                 value={email}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
-                onChange={(e)=>setemail(e.target.value)}
+                onChange={(e) => setemail(e.target.value)}
               />
             </div>
             <div>
@@ -52,7 +52,7 @@ const Page = () => {
                 value={password}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
