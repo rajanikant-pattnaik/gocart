@@ -14,7 +14,8 @@ export default function Home() {
         {user !== null ? (
           <div>
             <p>{user.email}</p>
-            <p>{user.password}</p>
+            <p>{user.id}</p>
+            <p>{user.username}</p>
             <p>{user.userType}</p>
           </div>
         ) : (
