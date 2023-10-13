@@ -1,10 +1,12 @@
 "use client"
 import { clearUser } from '@/state/features/userSlice';
+import { RootState } from '@/state/store';
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Navbar: React.FC = () => {
+  const user = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(clearUser());
@@ -62,7 +64,7 @@ const Navbar: React.FC = () => {
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-                <span onClick={handleLogout}>Account</span>
+                <span onClick={handleLogout}>{user==null?"Account":user.username}</span>
               </Fragment>
             {/* </Link> */}
           </li>

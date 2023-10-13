@@ -16,36 +16,36 @@ const Page = () => {
   const handleLogin = async (e: any) => {
     e.preventDefault();
     try {
-      if(isLogin){
-      const res = await axios.post("/api/users/user/login", {
-        email,
-        password,
-      });
-      const value = res.data;
-      const tokenData = value.tokenData;
-      const userVal: UserState = {
-        user: {
-          username: tokenData.username,
-          id: tokenData.id,
-          email: tokenData.email,
-          userType: "user",
-        },
-      };
-      dispatch(setUser(userVal.user));
-      router.push("/");
-    } else{
-      const res = await axios.post("/api/users/user/signup", {
-        username,
-        email,
-        password,
-      });
-      const value = res.data;
-      console.log(value);
-      setisLogin(true);
-    }
+      if (isLogin) {
+        const res = await axios.post("/api/users/user/login", {
+          email,
+          password,
+        });
+        const value = res.data;
+        const tokenData = value.tokenData;
+        const userVal: UserState = {
+          user: {
+            username: tokenData.username,
+            id: tokenData.id,
+            email: tokenData.email,
+            userType: "user",
+          },
+        };
+        dispatch(setUser(userVal.user));
+        router.push("/");
+      } else {
+        const res = await axios.post("/api/users/user/signup", {
+          username,
+          email,
+          password,
+        });
+        const value = res.data;
+        console.log(value);
+        setisLogin(true);
+      }
     } catch (error) {
       console.log(error);
-    }finally {
+    } finally {
       setusername("");
       setemail("");
       setPassword("");
@@ -55,11 +55,13 @@ const Page = () => {
     <div className="min-h-screen flex items-center justify-center bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold ">Login</h2>
+          <h2 className="mt-6 text-center text-3xl font-extrabold ">
+            {isLogin ? "Login" : "Register"}
+          </h2>
         </div>
         <form className="mt-8 space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
-          <div>
+            <div>
               <label htmlFor="email-address" className="sr-only">
                 Name
               </label>
@@ -140,7 +142,7 @@ const Page = () => {
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               onClick={handleLogin}
             >
-              Sign in
+              {isLogin ? "sign in" : "register"}
             </button>
           </div>
           <div>
