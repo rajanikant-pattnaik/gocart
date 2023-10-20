@@ -6,7 +6,8 @@ connectDb();
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
-    const { productName, AdminId, photo, description } = reqBody;
+    const { productName, AdminId, photo, description, productType, qty } =
+      reqBody;
 
     const user = await productDb.findOne({ AdminId, productName });
     if (user) {
@@ -20,6 +21,8 @@ export async function POST(request: NextRequest) {
       AdminId,
       photo,
       description,
+      productType,
+      qty,
       createdAt: Date.now(),
     });
     const savedProduct = await newProduct.save();

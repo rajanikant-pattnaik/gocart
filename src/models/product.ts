@@ -9,8 +9,16 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  productType: {
+    type: String,
+    required: true,
+  },
   photo: String,
   description: String,
+  qty: {
+    type: Number,
+    required: true,
+  },
   createdAt: {
     type: Number,
     required: [true, "Date is required"],
