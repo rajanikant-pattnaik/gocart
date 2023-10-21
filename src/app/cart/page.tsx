@@ -1,6 +1,5 @@
 "use client"
 import Navbar from '@/components/Navbar';
-// import { Providers } from '@/state/Provider';
 import { RootState } from '@/state/store';
 import React from 'react'
 import { useSelector } from 'react-redux';
