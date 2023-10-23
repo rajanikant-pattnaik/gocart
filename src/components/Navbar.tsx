@@ -1,6 +1,7 @@
 "use client";
 import { clearUser } from "@/state/features/userSlice";
 import { RootState } from "@/state/store";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Fragment } from "react";
@@ -11,8 +12,10 @@ const Navbar: React.FC = () => {
   const user = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch();
   const router = useRouter();
-  const handleLogout = () => {
+  const handleLogout = async () => {
     dispatch(clearUser());
+    const res = await axios.get("/api/users/user/logout");
+    console.log(res.data);
     router.push("/auth");
     toast.success("Logout successfully");
   };
@@ -68,7 +71,7 @@ const Navbar: React.FC = () => {
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-                <span onClick={handleLogout}>
+                <span onClick={handleLogout} className="cursor-pointer">
                   {user == null ? "Account" : user.username}
                 </span>
               </Fragment>
